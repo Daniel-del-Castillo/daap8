@@ -9,12 +9,14 @@ pub use problem_instance_error::{
     ProblemInstanceError,
     ProblemInstanceError::{IOError, SyntaxError},
 };
+mod point;
+pub use point::Point;
 
 const SEPARATOR: &'static str = "\t";
 
 /// An instance of the problem. It is composed of a set of points of the same dimensionality
 pub struct ProblemInstance {
-    points: Vec<Vec<f64>>,
+    pub(super) points: Vec<Point>,
 }
 
 impl ProblemInstance {
@@ -31,32 +33,35 @@ impl ProblemInstance {
         let mut file_reader = BufReader::new(File::open(path)?);
         let mut line = String::new();
         file_reader.read_line(&mut line)?;
-        let number_of_points = line.parse::<usize>().map_err(|_| SyntaxError(1))?;
+        let number_of_points = line.trim().parse::<usize>().map_err(|_| SyntaxError(1))?;
         line.clear();
         file_reader.read_line(&mut line)?;
-        let dimensionality = line.parse::<usize>().map_err(|_| SyntaxError(2))?;
+        let dimensionality = line.trim().parse::<usize>().map_err(|_| SyntaxError(2))?;
         let mut points = Vec::new();
-        for i in 0..=number_of_points {
+        for i in 0..number_of_points {
             line.clear();
             file_reader.read_line(&mut line)?;
             points.push(match ProblemInstance::parse_point(&line, SEPARATOR) {
-                Some(point) if point.len() == dimensionality => point,
+                Some(point) if point.get_dimensionality() == dimensionality => point,
                 _ => return Err(SyntaxError(i + 3)),
             });
         }
         Ok(ProblemInstance { points })
     }
 
-    fn parse_point(point_str: &str, separator: &str) -> Option<Vec<f64>> {
+    fn parse_point(point_str: &str, separator: &str) -> Option<Point> {
         point_str
+            .trim()
+            .replace(",", ".")
             .split(separator)
             .map(|coordinate| coordinate.parse::<f64>())
             .collect::<Result<Vec<f64>, ParseFloatError>>()
+            .map(|coordinates| Point::new(coordinates))
             .ok()
     }
 
     /// Allows to get the list of points
-    pub fn points(&self) -> &Vec<Vec<f64>> {
+    pub fn points(&self) -> &Vec<Point> {
         &self.points
     }
 }

@@ -5,4 +5,5 @@
 //! different algorithms and Metaheuristics like GRASP or a Tabu search
 
 mod problem_instance;
-pub use problem_instance::{ProblemInstance, ProblemInstanceError};
+pub use problem_instance::{Point, ProblemInstance, ProblemInstanceError};
+pub mod problem_solver;
