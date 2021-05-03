@@ -4,6 +4,7 @@ use super::Point;
 
 /// A struct that represents a solution to the problem. It contains the points
 /// that have been chosen for the solution
+#[derive(Clone)]
 pub struct ProblemSolution {
     pub(super) points: Vec<Point>,
 }

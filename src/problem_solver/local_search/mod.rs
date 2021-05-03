@@ -1,5 +1,7 @@
 use super::{ProblemInstance, ProblemSolution};
 
+mod swap;
+pub use swap::Swap;
 /// A trait that specifies how a local search should behave. A local search
 /// should search for better solutions inside an specific environment and
 /// only stop searching when it can't find a better one.
@@ -12,8 +14,7 @@ pub trait LocalSearch {
     ) -> ProblemSolution {
         loop {
             let another_solution = self.perform_search(instance, solution.clone());
-            if another_solution.get_total_completion_time() >= solution.get_total_completion_time()
-            {
+            if another_solution.get_z() <= solution.get_z() {
                 return solution;
             }
             solution = another_solution;
