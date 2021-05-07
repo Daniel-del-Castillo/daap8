@@ -1,7 +1,7 @@
 use std::cmp::{Eq, PartialEq};
 
 /// Represents a point in a n dimensional space
-#[derive(Clone)]
+#[derive(Debug, Clone)]
 pub struct Point {
     pub(crate) coordinates: Vec<f64>,
 }

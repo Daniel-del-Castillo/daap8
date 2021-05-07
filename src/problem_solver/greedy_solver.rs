@@ -14,7 +14,7 @@ impl ProblemSolver for GreedySolver {
         let mut center = GreedySolver::calculate_center(&points);
         let mut solution_points = Vec::new();
         while solution_points.len() < self.number_of_points {
-            let new_point = GreedySolver::get_furthest_point(&mut points, &center);
+            let new_point = GreedySolver::get_farthest_point(&mut points, &center);
             solution_points.push(new_point);
             center = GreedySolver::calculate_center(&solution_points);
         }
@@ -28,6 +28,7 @@ impl GreedySolver {
     /// Creates a new solver. The number of points the solution will have needs to
     /// be passed as argument
     pub fn new(number_of_points: usize) -> Self {
+        assert!(number_of_points > 0);
         GreedySolver { number_of_points }
     }
 
@@ -44,7 +45,7 @@ impl GreedySolver {
         Point::new(coordinates)
     }
 
-    fn get_furthest_point(available_points: &mut Vec<Point>, center: &Point) -> Point {
+    fn get_farthest_point(available_points: &mut Vec<Point>, center: &Point) -> Point {
         available_points.remove(
             available_points
                 .iter()
@@ -86,7 +87,7 @@ mod tests {
     }
     #[test]
     fn furthest_point() {
-        let point = GreedySolver::get_furthest_point(
+        let point = GreedySolver::get_farthest_point(
             &mut vec![
                 Point {
                     coordinates: vec![0.0, 0.0],

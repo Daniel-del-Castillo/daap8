@@ -3,6 +3,10 @@ mod problem_solution;
 pub use problem_solution::ProblemSolution;
 mod greedy_solver;
 pub use greedy_solver::GreedySolver;
+mod randomized_greedy_solver;
+pub use randomized_greedy_solver::RandomizedGreedySolver;
+mod grasp;
+pub use grasp::GRASP;
 pub mod local_search;
 
 /// A trait for an algorithm that is able to solve an instance of the problem
