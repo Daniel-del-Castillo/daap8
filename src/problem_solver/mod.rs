@@ -5,6 +5,8 @@ mod greedy_solver;
 pub use greedy_solver::GreedySolver;
 mod randomized_greedy_solver;
 pub use randomized_greedy_solver::RandomizedGreedySolver;
+mod tabu_search;
+pub use tabu_search::TabuSearch;
 mod grasp;
 pub use grasp::GRASP;
 pub mod local_search;

@@ -28,7 +28,8 @@ impl ProblemInstance {
     /// {dimensionality of the points}<br/>
     /// {A point with a coordinate for each dimension separated by tabs}<br/>
     /// Continues until all the points have been described<br/><br/>
-    /// If the coordinates aren't integers you must use . as separator
+    /// If the coordinates aren't integers you must use . as separator<br/>
+    /// Keep in mind that two equal points shouldn't exist
     pub fn from_file<P: AsRef<Path>>(path: P) -> Result<Self, ProblemInstanceError> {
         let mut file_reader = BufReader::new(File::open(path)?);
         let mut line = String::new();
