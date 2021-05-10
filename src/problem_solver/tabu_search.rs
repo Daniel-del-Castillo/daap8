@@ -114,7 +114,7 @@ impl TabuSearch {
                                 point_index,
                                 possible_point.clone(),
                             ),
-                            possible_point.clone(),
+                            solution.points[point_index].clone(),
                         )
                     })
             })
@@ -146,7 +146,7 @@ impl TabuSearch {
                                 point_index,
                                 possible_point.clone(),
                             ),
-                            possible_point.clone(),
+                            solution.points[point_index].clone(),
                         )
                     })
             })
