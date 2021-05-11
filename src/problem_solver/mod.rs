@@ -7,6 +7,8 @@ mod randomized_greedy_solver;
 pub use randomized_greedy_solver::RandomizedGreedySolver;
 mod tabu_search;
 pub use tabu_search::TabuSearch;
+mod branch_and_bound;
+pub use branch_and_bound::BranchAndBound;
 mod grasp;
 pub use grasp::GRASP;
 pub mod local_search;

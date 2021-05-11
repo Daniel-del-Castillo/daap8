@@ -49,7 +49,14 @@ impl TabuSearch {
     }
 
     /// Performs the tabu search with the specified number of iterations(interpreted
-    /// as iterations without improvement) and tenure value
+    /// as iterations without improvement) and tenure value. It works by evaluating
+    /// each possible swap between a point in the solution and a point outside the solution.
+    /// Then it performs the best swap even if the resulting solution is worse than the
+    /// actual one. Whenever a point scapes the solution it gets marked as tabu and won't
+    /// be able to reenter the solution until a certain number of iterations marked by the
+    /// tabu tenure. The only exception to this is if the resulting solution fulfills an
+    /// aspiration criteria, which in this case is being better than the best solution
+    /// found since the start
     fn perform_search(
         &self,
         instance: &ProblemInstance,

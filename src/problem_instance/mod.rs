@@ -12,7 +12,7 @@ pub use problem_instance_error::{
 mod point;
 pub use point::Point;
 
-const SEPARATOR: &'static str = "\t";
+const SEPARATOR: &str = "\t";
 
 /// An instance of the problem. It is composed of a set of points of the same dimensionality
 pub struct ProblemInstance {
